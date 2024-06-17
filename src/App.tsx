@@ -87,7 +87,7 @@ const App: React.FC = () => {
   const generatePost = async () => {
     try {
       setError('');
-      const response = await axios.post('http://172.20.10.3:5000/', {
+      const response = await axios.post('https://5452-102-89-22-54.ngrok-free.app/', {
         context_words: context.split(' '),
         platform: platform
       });
