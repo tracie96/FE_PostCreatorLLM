@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const Container = styled.div`
   display: flex;
@@ -70,17 +72,17 @@ const ErrorMessage = styled.div`
   margin-top: 10px;
 `;
 
-const App: React.FC = () => {
+const App = () => {
   const [context, setContext] = useState('');
   const [platform, setPlatform] = useState('Generic');
   const [generatedPost, setGeneratedPost] = useState('');
   const [error, setError] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e:any) => {
     setContext(e.target.value);
   };
 
-  const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handlePlatformChange = (e:any) => {
     setPlatform(e.target.value);
   };
 
@@ -93,31 +95,30 @@ const App: React.FC = () => {
       });
       setGeneratedPost(response.data.post);
     } catch (err) {
-      setError('Failed to generate post. Please try again.');
+      setError('Seems my server is down.');
       console.error('Error generating post:', err);
     }
   };
 
   return (
     <Container>
-      <Header>Post Generator</Header>
+      <Header>Post Generator Sample</Header>
       <InputContainer>
-        <Label>Context:</Label>
+        <Label>Add Context:</Label>
         <Input type="text" value={context} onChange={handleInputChange} placeholder="Enter words e.g., summer, vacation, beach"/>
         <Label>Platform:</Label>
         <Select value={platform} onChange={handlePlatformChange}>
           <option value="Twitter">Twitter</option>
           <option value="Instagram">Instagram</option>
-          <option value="Generic">LinkedIn</option>
-
+          <option value="LinkedIn">LinkedIn</option>
         </Select>
         <Button onClick={generatePost}>Generate Post</Button>
       </InputContainer>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {generatedPost && (
         <ResultContainer>
-          <h2>Generated Post:</h2>
-          <p>{generatedPost}</p>
+          <h3>Generated Post: (you can edit to your taste)</h3>
+          <ReactQuill value={generatedPost} theme="snow" />
         </ResultContainer>
       )}
     </Container>
