@@ -87,7 +87,7 @@ const App: React.FC = () => {
   const generatePost = async () => {
     try {
       setError('');
-      const response = await axios.post('https://postcreatorllm.onrender.com/', {
+      const response = await axios.post('http://172.20.10.3:5000/', {
         context_words: context.split(' '),
         platform: platform
       });
@@ -108,7 +108,7 @@ const App: React.FC = () => {
         <Select value={platform} onChange={handlePlatformChange}>
           <option value="Twitter">Twitter</option>
           <option value="Instagram">Instagram</option>
-          <option value="LinkedIn">LinkedIn</option>
+          <option value="Generic">LinkedIn</option>
 
         </Select>
         <Button onClick={generatePost}>Generate Post</Button>
