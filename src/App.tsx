@@ -89,7 +89,7 @@ const App = () => {
   const generatePost = async () => {
     try {
       setError('');
-      const response = await axios.post('https://5452-102-89-22-54.ngrok-free.app/', {
+      const response = await axios.post('https://4ca1-102-88-37-210.ngrok-free.app/', {
         context_words: context.split(' '),
         platform: platform
       });
